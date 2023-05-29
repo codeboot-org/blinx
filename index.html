@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>BLINX</title>
+  <style>
+
+    html {
+      font-size: calc(15px + 0.390625vw);
+    }
+
+    body {
+      --cb-header-height: 100px;
+      --cb-header-color: #016bb6;
+      margin: 0;
+      padding-top: calc(0.8 * var(--cb-header-height));
+      font-size: 125%;
+    }
+
+    code {
+      font-size: 80%;
+    }
+
+    td > p {
+      margin-block-start: 0.4em;
+      margin-block-end: 0.4em;
+    }
+
+    header {
+      height: var(--cb-header-height);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: var(--cb-header-color);
+      color: white;
+      text-align: center;
+      font-size: 36px;
+      transition: box-shadow 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    header > img {
+      margin-left: 1em;
+      margin-right: 0.5em;
+      width: 2em;
+    }
+
+    header.shadow {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    .content {
+      padding: 20px;
+      margin-bottom: var(--cb-header-height);
+    }
+
+    img {
+        width: 150px;
+    }
+  </style>
+  <script>
+
+    function loaded() {
+
+        window.addEventListener('scroll', function() {
+            var header = document.querySelector('header');
+            var scrollPosition = window.scrollY || window.pageYOffset;
+            var pageHeight = document.documentElement.scrollHeight - window.innerHeight;
+            if (scrollPosition > 0) {
+                header.classList.add('shadow');
+            } else {
+                header.classList.remove('shadow');
+            }
+        });
+
+        var location = window.location;
+
+        console.log('|'+location+'|');
+
+        var params = new URLSearchParams(location.search);
+        var id = params.get('id');
+
+        console.log('|'+id+'|');
+    }
+
+    document.addEventListener('DOMContentLoaded', loaded);
+
+  </script>
+</head>
+<body>
+  <header>
+    <b>BLINX</b>
+  </header>
+  <div class="content">
+
+<p>TODO...</p>
+
+</body>
+</html>
+
