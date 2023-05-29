@@ -84,10 +84,16 @@
         console.log('|'+location+'|');
 
         var params = new URLSearchParams(location.search);
-        var id = params.get('id');
+        var blinx_id = params.get('b');
+        var s31_id = params.get('s31');
 
-        console.log('|'+id+'|');
-    }
+        if (blinx_id !== null) {
+            alert('device is a BLINX with id=' + blinx_id);
+        } else if (s31_id !== null) {
+            alert('device is a Sonoff S31 with id=' + s31_id);
+        } else 
+            console.log('unknown device');
+        }
 
     document.addEventListener('DOMContentLoaded', loaded);
 
