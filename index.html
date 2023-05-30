@@ -84,16 +84,18 @@
         console.log('|'+location+'|');
 
         var params = new URLSearchParams(location.search);
-        var blinx_id = params.get('b');
+        var blx_id = params.get('blx');
         var s31_id = params.get('s31');
+        var id = '???';
 
-        if (blinx_id !== null) {
-            alert('device is a BLINX with id=' + blinx_id);
+        if (blx_id !== null) {
+            id = blx_id;
         } else if (s31_id !== null) {
-            alert('device is a Sonoff S31 with id=' + s31_id);
-        } else 
-            console.log('unknown device');
+            id = s31_id;
         }
+
+        document.querySelector('header > b').innerHTML = 'BLINX' + id;
+    }
 
     document.addEventListener('DOMContentLoaded', loaded);
 
