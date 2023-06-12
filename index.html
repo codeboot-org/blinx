@@ -38,10 +38,6 @@ header {
   display: none;
 }
 
-display[data-browser-type] {
-  display: block;
-}
-
 header.shadow {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
@@ -51,14 +47,16 @@ header.shadow {
   margin-bottom: var(--cb-header-height);
 }
 
-.iphone, .android, .not-desktop {
+.iphone, .android, .not-computer {
   display: none;
 }
 
+body[data-browser-type="iphone"] header,
+body[data-browser-type="android"] header,
 body[data-browser-type="iphone"] .iphone,
 body[data-browser-type="android"] .android,
-body[data-browser-type="iphone"] .not-desktop,
-body[data-browser-type="android"] .not-desktop {
+body[data-browser-type="iphone"] .not-computer,
+body[data-browser-type="android"] .not-computer {
   display: block;
 }
 
@@ -123,7 +121,7 @@ function loaded() {
   // determine browser type
 
   var ua = navigator.userAgent;
-  var browser_type = 'desktop';
+  var browser_type = 'computer';
 
   if (ua.match(/iphone/i)) {
     browser_type = 'iphone';
@@ -133,7 +131,7 @@ function loaded() {
 
   document.querySelector('#link').innerText = location.href;
 
-  if (browser_type === 'desktop') {
+  if (browser_type === 'computer') {
     redirect();
   } else {
     document.body.setAttribute('data-browser-type', browser_type);
@@ -159,7 +157,7 @@ document.addEventListener('DOMContentLoaded', loaded);
 <div class="content">
 
 
-<div class="not-desktop">
+<div class="not-computer">
 
 <p>Please visit this link using a device with a larger screen such as a desktop or laptop computer:</p>
 
