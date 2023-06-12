@@ -111,11 +111,15 @@
         document.querySelector('head > title').innerText = id;
 
 
+        var device_type = 'desktop';
+
         if (navigator.userAgent.match(/iphone/i)) {
-            document.body.setAttribute('data-device-type', 'iphone');
-        } else {
-            document.body.setAttribute('data-device-type', 'desktop');
+            device_type = 'iphone';
+        } else if (navigator.userAgent.match(/Android/i) {
+            device_type = 'android';
         }
+
+        document.body.setAttribute('data-device-type', device_type);
     }
 
     document.addEventListener('DOMContentLoaded', loaded);
@@ -130,7 +134,7 @@
 
 <div class="iphone">
 
-<p>This web page must be viewed on a desktop computer or tablet by pressing the <b><i>Share</i></b> button as shown below and then choosing your other device in AirDrop.</p>
+<p>This web page must be viewed on a desktop computer or tablet by pressing the browser's <b><i>Share</i></b> button as shown below and then choosing your other device in AirDrop.</p>
 
 <center>
 <img src="assets/iphone-share-button.png" width="217px"></img>
@@ -141,7 +145,7 @@
 
 <div class="android">
 
-<p>TODO: Android sharing instructions...</p>
+<p>TODO: add Android sharing instructions...</p>
 
 </div>
 
