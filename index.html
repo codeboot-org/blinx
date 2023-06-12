@@ -35,6 +35,11 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
+  display: none;
+}
+
+display[data-browser-type] {
+  display: block;
 }
 
 header.shadow {
@@ -46,15 +51,14 @@ header.shadow {
   margin-bottom: var(--cb-header-height);
 }
 
-.iphone, .android, .desktop, .not-desktop {
+.iphone, .android, .not-desktop {
   display: none;
 }
 
 body[data-browser-type="iphone"] .iphone,
 body[data-browser-type="android"] .android,
 body[data-browser-type="iphone"] .not-desktop,
-body[data-browser-type="android"] .not-desktop,
-body[data-browser-type="desktop"] .desktop {
+body[data-browser-type="android"] .not-desktop {
   display: block;
 }
 
@@ -127,14 +131,13 @@ function loaded() {
     browser_type = 'android';
   }
 
-  document.body.setAttribute('data-browser-type', browser_type);
-
-  document.querySelector('#link').innerHTML = '<a href="' + location.href + '">' + location.href + '</a>';
+  document.querySelector('#link').innerText = location.href;
 
   if (browser_type === 'desktop') {
-      redirect();
+    redirect();
+  } else {
+    document.body.setAttribute('data-browser-type', browser_type);
   }
-
 }
 
 function redirect() {
@@ -158,7 +161,7 @@ document.addEventListener('DOMContentLoaded', loaded);
 
 <div class="not-desktop">
 
-<p>Please visit the following link using a device that has a larger screen such as a desktop computer:</p>
+<p>Please visit this link using a device with a larger screen such as a desktop or laptop computer:</p>
 
 <center>
 <b><span id="link"></span></b>
@@ -180,19 +183,12 @@ document.addEventListener('DOMContentLoaded', loaded);
 </div>
 
 
-<p>Although it is not recommended you can also:</p>
+<p>Although it is not recommended due to the small screen you can also:</p>
 
 <center>
-<button onclick="redirect()">Open link in this browser</button>
+<button onclick="redirect()">Open the link in this browser</button>
 </center>
 
-
-</div>
-
-
-<div class="desktop">
-
-<p>You are being redirected to the codeBoot environment.</p>
 
 </div>
 
