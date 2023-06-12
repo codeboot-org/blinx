@@ -38,6 +38,7 @@
       background-color: var(--cb-header-color);
       color: white;
       text-align: center;
+      font-family: sans-serif;
       font-size: 36px;
       transition: box-shadow 0.3s;
       display: flex;
@@ -60,9 +61,16 @@
       margin-bottom: var(--cb-header-height);
     }
 
-    img {
-        width: 150px;
+    .iphone, .android, .desktop {
+        display: none;
     }
+
+    body[data-device-type="iphone"] .iphone,
+    body[data-device-type="android"] .android,
+    body[data-device-type="desktop"] .desktop {
+        display: block;
+    }
+
   </style>
   <script>
 
@@ -81,12 +89,10 @@
 
         var location = window.location;
 
-        console.log('|'+location+'|');
-
         var params = new URLSearchParams(location.search);
         var blx_id = params.get('blx');
         var s31_id = params.get('s31');
-        var id = '???';
+        var id = '';
 
         if (blx_id !== null) {
             id = blx_id;
@@ -94,7 +100,18 @@
             id = s31_id;
         }
 
-        document.querySelector('header > b').innerHTML = 'BLINX' + id;
+        id = 'BLINX' + id;
+
+        document.querySelector('header > b').innerHTML = '<svg viewBox="0 0 140 45" xmlns="http://www.w3.org/2000/svg" width="200px"><text x="0" y="42" textLength="140" lengthAdjust="spacingAndGlyphs" font-size="55px"; font-weight="bold"; font-family="sans-serif"; fill="currentColor">' + id + '</text></svg>';
+
+        document.querySelector('head > title').innerText = id;
+
+
+        if (navigator.userAgent.match(/iphone/i)) {
+            document.body.setAttribute('data-device-type', 'iphone');
+        } else {
+            document.body.setAttribute('data-device-type', 'desktop');
+        }
     }
 
     document.addEventListener('DOMContentLoaded', loaded);
@@ -103,11 +120,34 @@
 </head>
 <body>
   <header>
-    <b>BLINX</b>
+    <b>BLINX???</b>
   </header>
   <div class="content">
 
-<p>TODO...</p>
+<div class="iphone">
+
+<p>This web page is best viewed on a desktop computer or tablet.</p>
+
+<p>To view this web page on another device press the <b><i>Share</i></b> button as shown below and then choose your other device in AirDrop.</p>
+
+<img src="assets/iphone-share-button.png" width="457px"></img>
+
+</div>
+
+
+<div class="android">
+
+<p>TODO: Android sharing instructions...</p>
+
+</div>
+
+
+<div class="desktop">
+
+<p>TODO: Desktop instructions...</p>
+
+</div>
+
 
 </body>
 </html>
