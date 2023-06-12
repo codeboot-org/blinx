@@ -2,139 +2,171 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <title>BLINX</title>
-  <style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>BLINX</title>
+<style>
 
-    html {
-      font-size: calc(15px + 0.390625vw);
+html {
+  font-size: calc(15px + 0.390625vw);
+}
+
+body {
+  --cb-header-height: 100px;
+  --cb-header-color: #016bb6;
+  margin: 0;
+  padding-top: calc(0.8 * var(--cb-header-height));
+  font-size: 125%;
+}
+
+header {
+  height: var(--cb-header-height);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--cb-header-color);
+  color: white;
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 36px;
+  transition: box-shadow 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+header.shadow {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.content {
+  padding: 20px;
+  margin-bottom: var(--cb-header-height);
+}
+
+.iphone, .android, .desktop, .not-desktop {
+  display: none;
+}
+
+body[data-browser-type="iphone"] .iphone,
+body[data-browser-type="android"] .android,
+body[data-browser-type="iphone"] .not-desktop,
+body[data-browser-type="android"] .not-desktop,
+body[data-browser-type="desktop"] .desktop {
+  display: block;
+}
+
+img {
+  opacity: 0.75;
+}
+
+button {
+  background-color: yellow;
+  border: none;
+  border-radius: 10px;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+</style>
+<script>
+
+var dev_id = '';
+var dev_type = '';
+
+function loaded() {
+
+  window.addEventListener('scroll', function() {
+    var header = document.querySelector('header');
+    var scrollPosition = window.scrollY || window.pageYOffset;
+    var pageHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (scrollPosition > 0) {
+      header.classList.add('shadow');
+    } else {
+      header.classList.remove('shadow');
     }
+  });
 
-    body {
-      --cb-header-height: 100px;
-      --cb-header-color: #016bb6;
-      margin: 0;
-      padding-top: calc(0.8 * var(--cb-header-height));
-      font-size: 125%;
-    }
+  var location = window.location;
 
-    code {
-      font-size: 80%;
-    }
+  // determine device id
 
-    td > p {
-      margin-block-start: 0.4em;
-      margin-block-end: 0.4em;
-    }
+  var params = new URLSearchParams(location.search);
+  var blx_id = params.get('blx');
+  var s31_id = params.get('s31');
 
-    header {
-      height: var(--cb-header-height);
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background-color: var(--cb-header-color);
-      color: white;
-      text-align: center;
-      font-family: sans-serif;
-      font-size: 36px;
-      transition: box-shadow 0.3s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+  if (blx_id !== null) {
+    dev_type = 'blx';
+    dev_id = blx_id;
+  } else if (s31_id !== null) {
+    dev_type = 's31';
+    dev_id = s31_id;
+  }
 
-    header > img {
-      margin-left: 1em;
-      margin-right: 0.5em;
-      width: 2em;
-    }
+  var id = 'BLINX' + dev_id;
 
-    header.shadow {
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-    }
+  // put id in page title
 
-    .content {
-      padding: 20px;
-      margin-bottom: var(--cb-header-height);
-    }
+  document.querySelector('head > title').innerText = id;
 
-    .iphone, .android, .desktop {
-        display: none;
-    }
+  document.querySelector('header').innerHTML = '<svg viewBox="0 0 140 45" xmlns="http://www.w3.org/2000/svg" width="200px"><text x="0" y="42" textLength="140" lengthAdjust="spacingAndGlyphs" font-size="55px"; font-weight="bold"; font-family="sans-serif"; fill="currentColor">' + id + '</text></svg>';
 
-    body[data-device-type="iphone"] .iphone,
-    body[data-device-type="android"] .android,
-    body[data-device-type="desktop"] .desktop {
-        display: block;
-    }
+  // determine browser type
 
-    img {
-        opacity: 0.75;
-    }
+  var ua = navigator.userAgent;
+  var browser_type = 'desktop';
 
-  </style>
-  <script>
+  if (ua.match(/iphone/i)) {
+    browser_type = 'iphone';
+  } else if (ua.match(/Android/i)) {
+    browser_type = 'android';
+  }
 
-    function loaded() {
+  document.body.setAttribute('data-browser-type', browser_type);
 
-        window.addEventListener('scroll', function() {
-            var header = document.querySelector('header');
-            var scrollPosition = window.scrollY || window.pageYOffset;
-            var pageHeight = document.documentElement.scrollHeight - window.innerHeight;
-            if (scrollPosition > 0) {
-                header.classList.add('shadow');
-            } else {
-                header.classList.remove('shadow');
-            }
-        });
+  document.querySelector('#link').innerHTML = '<a href="' + location.href + '">' + location.href + '</a>';
 
-        var location = window.location;
+  if (browser_type === 'desktop') {
+      redirect();
+  }
 
-        var params = new URLSearchParams(location.search);
-        var blx_id = params.get('blx');
-        var s31_id = params.get('s31');
-        var id = '';
+}
 
-        if (blx_id !== null) {
-            id = blx_id;
-        } else if (s31_id !== null) {
-            id = s31_id;
-        }
+function redirect() {
+    window.location = 'https://codeboot.org/4.0.0/?~blinx-' + dev_type + '=' + dev_id;
+}
 
-        id = 'BLINX' + id;
+document.addEventListener('DOMContentLoaded', loaded);
 
-        document.querySelector('header > b').innerHTML = '<svg viewBox="0 0 140 45" xmlns="http://www.w3.org/2000/svg" width="200px"><text x="0" y="42" textLength="140" lengthAdjust="spacingAndGlyphs" font-size="55px"; font-weight="bold"; font-family="sans-serif"; fill="currentColor">' + id + '</text></svg>';
-
-        document.querySelector('head > title').innerText = id;
-
-
-        var device_type = 'desktop';
-
-        if (navigator.userAgent.match(/iphone/i)) {
-            device_type = 'iphone';
-        } else if (navigator.userAgent.match(/Android/i)) {
-            device_type = 'android';
-        }
-
-        document.body.setAttribute('data-device-type', device_type);
-    }
-
-    document.addEventListener('DOMContentLoaded', loaded);
-
-  </script>
+</script>
 </head>
+
+
 <body>
-  <header>
-    <b>BLINX???</b>
-  </header>
-  <div class="content">
+
+
+<header>BLINX</header>
+
+
+<div class="content">
+
+
+<div class="not-desktop">
+
+<p>Please visit the following link using a device that has a larger screen such as a desktop computer:</p>
+
+<center>
+<b><span id="link"></span></b>
+</center>
 
 <div class="iphone">
 
-<p>This web page must be viewed on a desktop computer or tablet by pressing the browser's <b><i>Share</i></b> button as shown below and then choosing your other device in AirDrop.</p>
+<p>If that computer is accessible with AirDrop you can do this by pressing the <span style="font-family: sans-serif; font-weight: bold;">Share</span> button as shown below and then choosing your computer in AirDrop.</p>
 
 <center>
 <img src="assets/iphone-share-button.png" width="217px"></img>
@@ -145,17 +177,27 @@
 
 <div class="android">
 
-<p>TODO: add Android sharing instructions...</p>
+</div>
+
+
+<p>Although it is not recommended you can also:</p>
+
+<center>
+<button onclick="redirect()">Open link in this browser</button>
+</center>
+
 
 </div>
 
 
 <div class="desktop">
 
-<p>TODO: Desktop instructions...</p>
+<p>You are being redirected to the codeBoot environment.</p>
 
 </div>
 
+
+</div>
 
 </body>
 </html>
