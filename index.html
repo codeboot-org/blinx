@@ -32,7 +32,6 @@ header {
   font-family: sans-serif;
   font-size: 36px;
   transition: box-shadow 0.3s;
-  display: flex;
   align-items: center;
   justify-content: center;
   display: none;
@@ -51,8 +50,6 @@ header.shadow {
   display: none;
 }
 
-body[data-browser-type="iphone"] header,
-body[data-browser-type="android"] header,
 body[data-browser-type="iphone"] .iphone,
 body[data-browser-type="android"] .android,
 body[data-browser-type="iphone"] .not-computer,
@@ -60,18 +57,29 @@ body[data-browser-type="android"] .not-computer {
   display: block;
 }
 
+body[data-browser-type="iphone"] header,
+body[data-browser-type="android"] header {
+  display: flex;
+}
+
 img {
   opacity: 0.75;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 button {
-  background-color: yellow;
+  background-color: #FFD000;
   border: none;
   border-radius: 10px;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
+  font-size: 16px;
+}
+
+#link {
+  font-family: monospace;
   font-size: 16px;
 }
 
@@ -128,8 +136,10 @@ function loaded() {
   } else if (ua.match(/Android/i)) {
     browser_type = 'android';
   }
+    browser_type = 'iphone';
 
-  document.querySelector('#link').innerText = location.href;
+//  document.querySelector('#link').innerText = location.href;
+  document.querySelector('#link').innerHTML = '<svg viewBox="0 0 100 10" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:400px"><text x="0" y="8" textLength="100" lengthAdjust="spacingAndGlyphs" font-size="7px"; font-family="monospace"; font-weight="bold"; fill="currentColor">' + location.href + '</text></svg>'
 
   if (browser_type === 'computer') {
     redirect();
@@ -139,7 +149,7 @@ function loaded() {
 }
 
 function redirect() {
-  window.location = 'https://app.codeboot.org/4.0.0/?init=.~lang=py-novice.~hidden=true.iCmNvcHlfZmlsZSgnaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2NvZGVib290LW9yZy9ibGlueC9tYWluL19ibGlueF9oZWxwLnB5JywnX2JsaW54X2hlbHAucHknKTtpbXBvcnQgX2JsaW54X2hlbHA=.~blinx-' + dev_type + '=' + dev_id + '.e';
+  window.location = 'https://app.codeboot.org/4.0.0/?init=bI8IjzF86kRCmlkdKSA2g7vigvH8VF4qjYziEjtLv377DSyX3LbkJ0aHAXpW-LkrQoUdEb_Sc2twYthLmH7CiWsPc6REuVKD2GvW_ULXvSaOkieHLsz4iIOsOa2_YcAbc1xrWWkUtfCMkE3aa_URnWvOEOul0fxh8bWlJa_T06M.~lang=py-novice.~hidden=true.iCmNvcHlfZmlsZSgnaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2NvZGVib290LW9yZy9ibGlueC9tYWluL19ibGlueF9oZWxwLnB5JywnX2JsaW54X2hlbHAucHknKTtpbXBvcnQgX2JsaW54X2hlbHA=.~~blinx-' + dev_type + '=' + dev_id + '.e';
 }
 
 document.addEventListener('DOMContentLoaded', loaded);
@@ -159,10 +169,10 @@ document.addEventListener('DOMContentLoaded', loaded);
 
 <div class="not-computer">
 
-<p>Please visit this link using a device with a larger screen such as a desktop or laptop computer:</p>
+<p>To use this BLINX device please visit the following link using a computer with a larger screen such as a desktop or laptop computer:</p>
 
 <center>
-<b><span id="link"></span></b>
+<span id="link"></span>
 </center>
 
 <div class="iphone">
@@ -181,7 +191,7 @@ document.addEventListener('DOMContentLoaded', loaded);
 </div>
 
 
-<p>Although it is not recommended due to the small screen you can also:</p>
+<p>Although it is not recommended due to the small screen you can:</p>
 
 <center>
 <button onclick="redirect()">Open the link in this browser</button>
