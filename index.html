@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
 <meta charset="utf-8">
@@ -10,6 +10,15 @@
 
 html {
   font-size: calc(15px + 0.390625vw);
+}
+
+html:lang(fr) .lang-en,
+.lang-fr {
+  display: none;
+}
+
+html:lang(fr) .lang-fr {
+  display: block;
 }
 
 body {
@@ -89,7 +98,18 @@ button {
 var dev_id = '';
 var dev_type = '';
 
+function setup_lang() {
+
+  var languages = navigator.languages.slice();
+  var elem = document.getElementsByTagName('html')[0];
+  if (languages.length > 0) {
+    elem.setAttribute('lang', languages[0]);
+  }   
+};
+
 function loaded() {
+
+  setup_lang();
 
   window.addEventListener('scroll', function() {
     var header = document.querySelector('header');
@@ -169,7 +189,9 @@ document.addEventListener('DOMContentLoaded', loaded);
 
 <div class="not-computer">
 
-<p>To use this BLINX device please visit the following link using a computer with a larger screen such as a desktop or laptop computer:</p>
+<p class="lang-en">To use this BLINX device please visit the following link using a computer with a larger screen such as a desktop or laptop computer:</p>
+
+<p class="lang-fr">Pour utiliser cet appareil BLINX veuillez visiter le lien suivant à l'aide d'un ordinateur avec un écran plus large tel qu'un ordinateur de bureau ou portable :</p>
 
 <center>
 <span id="link"></span>
@@ -177,7 +199,9 @@ document.addEventListener('DOMContentLoaded', loaded);
 
 <div class="iphone">
 
-<p>If that computer is accessible with AirDrop you can do this by pressing the <span style="font-family: sans-serif; font-weight: bold;">Share</span> button as shown below and then choosing your computer in AirDrop.</p>
+<p class="lang-en">If that computer is accessible with AirDrop you can do this by pressing the <span style="font-family: sans-serif; font-weight: bold;">Share</span> button as shown below and then choosing your computer in AirDrop.</p>
+
+<p class="lang-fr">Si cet ordinateur est accessible avec AirDrop vous pouvez le faire avec le bouton <span style="font-family: sans-serif; font-weight: bold;">Partager</span> tel qu'indiqué ci-dessous et en choisissant l'ordinateur avec AirDrop.</p>
 
 <center>
 <img src="assets/iphone-share-button.png" width="217px"></img>
@@ -191,10 +215,12 @@ document.addEventListener('DOMContentLoaded', loaded);
 </div>
 
 
-<p>Although it is not recommended due to the small screen you can:</p>
+<p class="lang-en">Although it is not recommended due to the small screen you can:</p>
+
+<p class="lang-fr">Bien que ce ne soit pas recommandé à cause du petit écran vous pouvez :</p>
 
 <center>
-<button onclick="redirect()">Open the link in this browser</button>
+<button onclick="redirect()"><span class="lang-en">Open the link in this browser</span><span class="lang-fr">Ouvrir le lien dans ce navigateur</span></button>
 </center>
 
 
