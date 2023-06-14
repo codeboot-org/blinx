@@ -88,18 +88,19 @@ a program as if it were a regular ".csv" file, but at an HTTP path that
 indicates the address of the BLINX device and the sensors being accessed.
 For example, this Python code could be executed in codeBoot to read the recent
 ambient temperature and humidity from BLINX218, based on time intervals of
-one second, and store them in the variable <code>th</code>:
+one second, and store them in the variable
+<span style="color:rgb(1, 1, 1);font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">th</span></code></span> :
 </p>
 
 <center>
-<div style="color:rgb(1, 1, 1);font-size:18px;font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">th</span><span>&nbsp;</span><span style="color:rgb(1, 1, 1);">=</span><span>&nbsp;</span><span style="color:rgb(1, 1, 1);">read_file</span><span>(</span><span style="color:rgb(170, 17, 17);">&#34;http://BLINX218.local/temp,humid.csv&#34;</span><span>)</span></code></div>
+<div style="color:rgb(1, 1, 1);font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">th</span><span>&nbsp;</span><span style="color:rgb(1, 1, 1);">=</span><span>&nbsp;</span><span style="color:rgb(1, 1, 1);">read_file</span><span>(</span><span style="color:rgb(170, 17, 17);">&#34;http://BLINX218.local/temp,humid.csv&#34;</span><span>)</span></code></div>
 </center>
 
 <p>
 The data can then be viewed in the form of a graph using
-<span style="color:rgb(1, 1, 1);font-size:18px;font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">chart(th)</span></code></span>
+<span style="color:rgb(1, 1, 1);font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">chart(th)</span></code></span>
 or as a spreadsheet in the editing area by executing
-<span style="color:rgb(1, 1, 1);font-size:18px;font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">write_file</span><span>(</span><span style="color:rgb(170, 17, 17);">&#34;th.csv&#34;</span><span>, th);show_file</span><span>(</span><span style="color:rgb(170, 17, 17);">&#34;th.csv&#34;</span><span>)</span></code></span>
+<span style="color:rgb(1, 1, 1);font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">write_file</span><span>(</span><span style="color:rgb(170, 17, 17);">&#34;th.csv&#34;</span><span style="color:rgb(1, 1, 1);">, th);show_file</span><span>(</span><span style="color:rgb(170, 17, 17);">&#34;th.csv&#34;</span><span>)</span></code></span>
 .
 </p>
 
@@ -147,7 +148,7 @@ wifi auquel il essaie de se connecter, comme indiqué sur l'image suivante:
 
 <p>
 Avec les réglages d'usine, le dispositif BLINX tente de se connecter au
-réseau wifi nommé "BLINXNET" avec mot de passe "blinxnet". Cela peut être modifié
+réseau wifi nommé « BLINXNET » avec mot de passe « blinxnet ». Cela peut être modifié
 si désiré en utilisant <a>cette procédure</a>. La lumière rouge clignotera tant
 que la connexion ne sera pas établie, en particulier si le point d'accès
 est hors de portée ou s'il a atteint sa capacité maximale (les points
@@ -175,18 +176,19 @@ un fichier « .csv » normal mais à un chemin d'accès HTTP qui indique
 l'adresse de l'appareil BLINX et les capteurs qui sont consultés. Par exemple
 ce code Python pourrait être exécuté dans codeBoot pour lire de
 l'appareil BLINX218 la température et humidité ambiante récente en
-fonction du temps à chaque seconde et la stocker dans la variable <code>th</code> :
+fonction du temps à chaque seconde et la stocker dans la variable
+<span style="color:rgb(1, 1, 1);font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">th</span></code></span> :
 </p>
 
 <center>
-<div style="color:rgb(1, 1, 1);font-size:18px;font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">th</span><span>&nbsp;</span><span style="color:rgb(1, 1, 1);">=</span><span>&nbsp;</span><span style="color:rgb(1, 1, 1);">read_file</span><span>(</span><span style="color:rgb(170, 17, 17);">&#34;http://BLINX218.local/temp,humid.csv&#34;</span><span>)</span></code></div>
+<div style="color:rgb(1, 1, 1);font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">th</span><span>&nbsp;</span><span style="color:rgb(1, 1, 1);">=</span><span>&nbsp;</span><span style="color:rgb(1, 1, 1);">read_file</span><span>(</span><span style="color:rgb(170, 17, 17);">&#34;http://BLINX218.local/temp,humid.csv&#34;</span><span>)</span></code></div>
 </center>
 
 <p>
 Les données peuvent ensuite être visionnées sous forme de graphique avec
-<span style="color:rgb(1, 1, 1);font-size:18px;font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">chart(th)</span></code></span>
+<span style="color:rgb(1, 1, 1);font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">chart(th)</span></code></span>
 ou sous forme de tableur dans la zone d'édition en exécutant
-<span style="color:rgb(1, 1, 1);font-size:18px;font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">write_file</span><span>(</span><span style="color:rgb(170, 17, 17);">&#34;th.csv&#34;</span><span>, th);show_file</span><span>(</span><span style="color:rgb(170, 17, 17);">&#34;th.csv&#34;</span><span>)</span></code></span>
+<span style="color:rgb(1, 1, 1);font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">write_file</span><span>(</span><span style="color:rgb(170, 17, 17);">&#34;th.csv&#34;</span><span style="color:rgb(1, 1, 1);">, th);show_file</span><span>(</span><span style="color:rgb(170, 17, 17);">&#34;th.csv&#34;</span><span>)</span></code></span>
 .
 </p>
 
