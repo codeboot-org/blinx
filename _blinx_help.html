@@ -61,7 +61,7 @@ following picture:
 
 <p>
 With factory settings the BLINX device tries to connect to the wifi network
-named BLINXNET, as shown in the picture. This can be changed if desired using
+named "BLINXNET" with password "blinxnet". This can be changed if desired using
 <a>this procedure</a>. The red light will blink as long as the connection
 is not established, in particular if the access-point is out of range or
 it has reached its capacity (typical access-points have a limit of
@@ -69,14 +69,39 @@ it has reached its capacity (typical access-points have a limit of
 </p>
 
 <p>
-To allow wireless communication between codeBoot and BLINX, <b>both
-devices must be connected to the same wireless network.</b> A typical
+To allow wireless communication between codeBoot and BLINX, <b>the computer
+that is running codeBoot must be connected on the same wifi network as the
+BLINX device</b>. This network can be isolated from the internet. A typical
 setup is shown in the following picture:
 </p>
 
 <center>
-<img src="https://raw.githubusercontent.com/codeboot-org/blinx/main/assets/blinxnet.png" width="600px"></img>
+<img src="https://raw.githubusercontent.com/codeboot-org/blinx/main/assets/blinxnet-en.png" width="700px"></img>
 </center>
+
+<h3><b>3. Programmatic acces to BLINX</b></h3>
+
+<p>
+The BLINX device automatically reads its sensors every second and stores the
+recent readings in the ".csv" format. These data can then be retrieved by
+a program as if it were a regular ".csv" file, but at an HTTP path that
+indicates the address of the BLINX device and the sensors being accessed.
+For example, this Python code could be executed in codeBoot to read the recent
+ambient temperature and humidity from BLINX218, based on time intervals of
+one second, and store them in the variable <code>th</code>:
+</p>
+
+<center>
+<div style="color:rgb(1, 1, 1);font-size:18px;font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">th</span><span>&nbsp;</span><span style="color:rgb(1, 1, 1);">=</span><span>&nbsp;</span><span style="color:rgb(1, 1, 1);">read_file</span><span>(</span><span style="color:rgb(170, 17, 17);">&#34;http://BLINX218.local/temp,humid.csv&#34;</span><span>)</span></code></div>
+</center>
+
+<p>
+The data can then be viewed in the form of a graph using
+<span style="color:rgb(1, 1, 1);font-size:18px;font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">chart(th)</span></code></span>
+or as a spreadsheet in the editing area by executing
+<span style="color:rgb(1, 1, 1);font-size:18px;font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">write_file</span><span>(</span><span style="color:rgb(170, 17, 17);">&#34;th.csv&#34;</span><span>, th);show_file</span><span>(</span><span style="color:rgb(170, 17, 17);">&#34;th.csv&#34;</span><span>)</span></code></span>
+.
+</p>
 
 </div>
 
@@ -115,29 +140,55 @@ wifi auquel il essaie de se connecter, comme indiqué sur l'image suivante:
 </p>
 
 <center>
-<img src="https://raw.githubusercontent.com/codeboot-org/blinx/main/assets/blinx-connecting-fr.png" width="600px"></img>
+<img src="https://raw.githubusercontent.com/codeboot-org/blinx/main/assets/blinx-connecting-fr.png" width="400px"></img>
 </center>
 
 <br>
 
 <p>
 Avec les réglages d'usine, le dispositif BLINX tente de se connecter au
-réseau wifi nommé BLINXNET, comme indiqué sur l'image. Cela peut être modifié
-si désiré en utilisant cette procédure. La lumière rouge clignotera tant
+réseau wifi nommé "BLINXNET" avec mot de passe "blinxnet". Cela peut être modifié
+si désiré en utilisant <a>cette procédure</a>. La lumière rouge clignotera tant
 que la connexion ne sera pas établie, en particulier si le point d'accès
 est hors de portée ou s'il a atteint sa capacité maximale (les points
 d'accès typiques ont une limite de 20 à 50 appareils connectés).
 </p>
 
 <p>
-Pour permettre la communication sans fil entre codeBoot et BLINX, les deux
-dispositifs doivent être connectés au même réseau sans fil. Une configuration
-typique est illustrée sur l'image suivante:
+Pour permettre la communication sans fil entre codeBoot et BLINX,
+<b>l'ordinateur exécutant codeBoot doit être connecté au même réseau sans
+fil que l'appareil BLINX</b>. Ce réseau peut être isolé du réseau internet.
+Une configuration typique est illustrée sur l'image suivante:
 </p>
 
 <center>
-<img src="https://raw.githubusercontent.com/codeboot-org/blinx/main/assets/blinxnet.png" width="400px"></img>
+<img src="https://raw.githubusercontent.com/codeboot-org/blinx/main/assets/blinxnet-fr.png" width="700px"></img>
 </center>
+
+<h3><b>3. Accès programmatique à BLINX</b></h3>
+
+<p>
+L'appareil BLINX fait automatiquement des lectures de ses capteurs à chaque
+seconde et mémorise les lectures récentes dans le format « .csv ». Ces
+données peuvent ensuite être récupérées par un programme comme si c'était
+un fichier « .csv » normal mais à un chemin d'accès HTTP qui indique
+l'adresse de l'appareil BLINX et les capteurs qui sont consultés. Par exemple
+ce code Python pourrait être exécuté dans codeBoot pour lire de
+l'appareil BLINX218 la température et humidité ambiante récente en
+fonction du temps à chaque seconde et la stocker dans la variable <code>th</code> :
+</p>
+
+<center>
+<div style="color:rgb(1, 1, 1);font-size:18px;font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">th</span><span>&nbsp;</span><span style="color:rgb(1, 1, 1);">=</span><span>&nbsp;</span><span style="color:rgb(1, 1, 1);">read_file</span><span>(</span><span style="color:rgb(170, 17, 17);">&#34;http://BLINX218.local/temp,humid.csv&#34;</span><span>)</span></code></div>
+</center>
+
+<p>
+Les données peuvent ensuite être visionnées sous forme de graphique avec
+<span style="color:rgb(1, 1, 1);font-size:18px;font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">chart(th)</span></code></span>
+ou sous forme de tableur dans la zone d'édition en exécutant
+<span style="color:rgb(1, 1, 1);font-size:18px;font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">write_file</span><span>(</span><span style="color:rgb(170, 17, 17);">&#34;th.csv&#34;</span><span>, th);show_file</span><span>(</span><span style="color:rgb(170, 17, 17);">&#34;th.csv&#34;</span><span>)</span></code></span>
+.
+</p>
 
 </div>
 
