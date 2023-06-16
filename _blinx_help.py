@@ -1,7 +1,12 @@
-#cmds = host_eval('CodeBoot.prototype.cb.extractCommands(window.location.href).filter(function (cmd) { return typeof(cmd)==="string" && cmd.startsWith("~~blinx-"); })')
+from codeboot import app
 
-html = read_file('https://raw.githubusercontent.com/codeboot-org/blinx/main/_blinx_help.html')
+app.hide()
 
-host_eval('(function (html) { var body = document.querySelector("#cb-body"); CodeBoot.prototype.open = function() { body.innerHTML = ""; rte.vm.eventClearConsole(); rte.vm.setHidden(false); }; rte.vm.setHidden(true); body.innerHTML = html; })')(html)
+write_file("blinx_config.py", 'blinx_id = "BLINX' + str(app.params.get('blinx-blx', "000")) + '"')
 
-document.body.setAttribute('lang', document.querySelector('.cb-vm').getAttribute('lang'))
+document.body.innerHTML = read_file('https://raw.githubusercontent.com/codeboot-org/blinx/main/_blinx_help.html')
+
+document.querySelector("#button-open-fr").setAttribute("onclick", lambda e: app.show())
+document.querySelector("#button-open-en").setAttribute("onclick", lambda e: app.show())
+
+document.body.setAttribute('lang', app.lang)
