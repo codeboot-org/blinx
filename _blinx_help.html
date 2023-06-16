@@ -29,18 +29,26 @@
 
 <div class="cb-content">
 
+<center>
+<button onclick="alert(111)">Open codeBoot</button>
+<button onclick="alert(222)">Temperature example</button>
+<button onclick="alert(333)">Buzzer example</button>
+</center>
+
+<br>
+
 <h3><b>1. Introduction</b></h3>
 
 <p>
-The BLINX wireless device is an accessory to
-<a href="https://codeboot.org">codeBoot</a>, a free programming environment
+The BLINX wireless device is an accessory to <b>codeBoot</b>,
+a free programming environment
 that runs in the browser specifically designed to make
 programming more accessible and user-friendly. An intuitive user
 interface avoids the complexities of traditional programming environments.
 When BLINX is used with codeBoot, it is easy to create programs
 that interface to the real world. Users can implement functionalities
 like ambient temperature monitoring, soil humidity tracking, object
-distance measurement, and more.
+distance measurement, motion detection, and more.
 </p>
 
 <h3><b>2. BLINX device operation</b></h3>
@@ -49,7 +57,7 @@ distance measurement, and more.
 The BLINX device is powered by plugging it into the USB port of a computer,
 or a 5 watt USB charger, or a USB battery. When it is first powered on, or
 after the reset button is pressed, the screen will indicate the device's
-name and the name of the wifi it is trying to connect to, as shown in the
+name and the name of the wifi network it is trying to connect to, as shown in the
 following picture:
 </p>
 
@@ -62,7 +70,8 @@ following picture:
 <p>
 With factory settings the BLINX device tries to connect to the wifi network
 named "BLINXNET" with password "blinxnet". This can be changed if desired using
-<a>this procedure</a>. The red light will blink as long as the connection
+<a href="#wifi-configuration-en">the procedure explained in section 4</a>.
+The red light will blink as long as the connection
 is not established, in particular if the access-point is out of range or
 it has reached its capacity (typical access-points have a limit of
 20 to 50 connected devices).
@@ -70,8 +79,9 @@ it has reached its capacity (typical access-points have a limit of
 
 <p>
 To allow wireless communication between codeBoot and BLINX, <b>the computer
-that is running codeBoot must be connected on the same wifi network as the
-BLINX device</b>. This network can be isolated from the internet. A typical
+that is running codeBoot must be connected to the same wifi network as the
+BLINX device</b>. This network can be connected to the internet or disconnected
+when private access to the BLINX device is desired. A typical
 setup is shown in the following picture:
 </p>
 
@@ -79,16 +89,33 @@ setup is shown in the following picture:
 <img src="https://raw.githubusercontent.com/codeboot-org/blinx/main/assets/blinxnet-en.png" width="700px"></img>
 </center>
 
+<p>
+The BLINX device has integrated ambiant temperature and humidity sensors.
+There are 3 ports to which
+<a href="https://www.seeedstudio.com/catalogsearch/result/?q=grove%20sensors">
+external sensors and actuators</a> can be connected using
+<a href="https://www.seeedstudio.com/catalogsearch/result/?q=grove%20cables">"Grove" type 4 wire cables</a>. The top and bottom ports must be used for
+analog sensors, such as the
+<a href="https://www.seeedstudio.com/Grove-Capacitive-Moisture-Sensor-Corrosion-Resistant.html">soil moisture sensor</a>,
+<a href="https://www.seeedstudio.com/Grove-PIR-Motion-Sensor.html">motion sensor</a>, and
+<a href="https://www.seeedstudio.com/One-Wire-Temperature-Sensor-p-1235.html">immersible temperature sensor</a>, and actuators, such as the
+<a href="https://www.seeedstudio.com/Grove-Relay.html">relay</a> and
+<a href="https://www.seeedstudio.com/Grove-Servo.html">servo motor</a>.
+The port on the right side is used for I2C sensors such as the
+<a href="https://www.seeedstudio.com/Grove-Time-of-Flight-Distance-Sensor-VL53L0X.html">time-of-flight distance sensor</a> and the
+<a href="https://www.seeedstudio.com/Grove-High-Precision-Barometer-Sensor-DPS310-p-4397.html">barometric pressure sensor</a>.
+</p>
+
 <h3><b>3. Programmatic acces to BLINX</b></h3>
 
 <p>
 The BLINX device automatically reads its sensors every second and stores the
-recent readings in the ".csv" format. These data can then be retrieved by
-a program as if it were a regular ".csv" file, but at an HTTP path that
-indicates the address of the BLINX device and the sensors being accessed.
-For example, this Python code could be executed in codeBoot to read the recent
-ambient temperature and humidity from BLINX218, based on time intervals of
-one second, and store them in the variable
+recent readings internally. The stored data can be retrieved in the ".csv"
+format by a program as if it were a regular ".csv" file, but using an HTTP URL
+that indicates the address of the BLINX device and the sensors being accessed.
+For example, the following Python code could be executed in codeBoot to read
+the recent ambient temperature and humidity from BLINX218, based on time
+intervals of one second, and store them in the variable
 <span style="color:rgb(1, 1, 1);font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">th</span></code></span> :
 </p>
 
@@ -104,6 +131,129 @@ or as a spreadsheet in the editing area by executing
 .
 </p>
 
+<p>
+After the last "<code style="color:rgb(1, 1, 1);">/</code>" of the URL is
+a comma separated list of the sensors being accessed followed by ".csv".
+These sensor names are currently defined:
+</p>
+
+<ol>
+
+<li>
+<b><code style="color:rgb(1, 1, 1);">temp</code></b>: the ambiant temperature, in degrees Celcius.
+
+<li>
+<b><code style="color:rgb(1, 1, 1);">humid</code></b>: the ambiant relative humidity, from 0 to 100 percent.
+
+<li>
+<b><code style="color:rgb(1, 1, 1);">volt1</code></b> and <b><code style="color:rgb(1, 1, 1);">volt2</code></b>: the voltage at signal 1 and 2 of the top port. Only voltages between 0 and 3 volts can be measured, which is compatible with most Grove analog sensors. Note that to use signal 2 a splitter cable or soldering skills are required (the cable's yellow wire is signal 1 and the white wire is signal 2).
+
+<li>
+<b><code style="color:rgb(1, 1, 1);">volt3</code></b> and <b><code style="color:rgb(1, 1, 1);">volt4</code></b>: the voltage at signal 1 and 2 of the bottom port.
+
+</ol>
+
+<p>
+The URL can also end with modifiers in the format "<code style="color:rgb(1, 1, 1);">?</code><i>modifier1</i><code style="color:rgb(1, 1, 1);">&</code><i>modifier2</i><code style="color:rgb(1, 1, 1);">?</code><i>...</i>". The following
+modifiers are supported:
+</p>
+
+<ol>
+
+<li>
+<b><code style="color:rgb(1, 1, 1);">delta=10s</code></b>: get readings at 10 second intervals. For longer intervals there are also <b><code style="color:rgb(1, 1, 1);">delta=1m</code></b> (1 minute), <b><code style="color:rgb(1, 1, 1);">delta=10m</code></b> (10 minutes), and <b><code style="color:rgb(1, 1, 1);">delta=1h</code></b> (1 hour).
+
+<li>
+<b><code style="color:rgb(1, 1, 1);">n=1</code></b>: get only the latest reading. The number after the "<code style="color:rgb(1, 1, 1);">=</code>" is the number of readings to get.
+
+</ol>
+
+<p>
+For example, executing the following code will get the ambiant temperature
+over the last 30 minutes with one temperature reading per minute:
+</p>
+
+<center>
+<div style="color:rgb(1, 1, 1);font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">temp</span><span>&nbsp;</span><span style="color:rgb(1, 1, 1);">=</span><span>&nbsp;</span><span style="color:rgb(1, 1, 1);">read_file</span><span>(</span><span style="color:rgb(170, 17, 17);">&#34;http://BLINX218.local/temp.csv?delta=1m&amp;n=30&#34;</span><span>)</span></code></div>
+</center>
+
+<p>
+Actuators are supported through the
+<span style="color:rgb(1, 1, 1);font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">write_file</span></code></span>
+function. The first parameter is the URL of the BLINX device and the second
+parameter is a string indicating the operation. The following operations
+are defined:
+</p>
+
+<ol>
+
+<li>
+<b><i>output</i><code style="color:rgb(1, 1, 1);">=on</code></b>: sends an "on" pulse to <i>output</i> for 10 seconds where <i>output</i> can be <code style="color:rgb(1, 1, 1);">led</code> (the red LED), or <code style="color:rgb(1, 1, 1);">buzzer</code> (the internal buzzer), or
+<code style="color:rgb(1, 1, 1);">output1</code>/<code style="color:rgb(1, 1, 1);">output2</code>/<code style="color:rgb(1, 1, 1);">output3</code>/<code style="color:rgb(1, 1, 1);">output4</code> (the 4 signals of the top and bottom ports). A typical use is to turn on an externally connected actuator such as a relay, light, etc.
+
+<li>
+<b><i>output</i><code style="color:rgb(1, 1, 1);">=on/0/</code><i>duration</i></b>: sends an "on" pulse to <i>output</i> for <i>duration</i> seconds. After this duration the signal will be "off" until the next operation on that port.
+
+<li>
+<b><i>output</i><code style="color:rgb(1, 1, 1);">=</code><i>duty</i><code style="color:rgb(1, 1, 1);">/</code><i>frequency</i><code style="color:rgb(1, 1, 1);">/</code><i>duration</i></b>: sends a square wave to <i>output</i> where
+<i>frequency</i> is the frequency in Hz, <i>duty</i>/1024 is the proportion of the square wave cycle when the signal is "on", and <i>duration</i> is the duration of the wave. A typical use is to generate a PWM wave to control a servo motor.
+
+<li>
+<b><code style="color:rgb(1, 1, 1);">screen=</code><i>text</i></b>: writes the text to the screen (if <i>text</i> is empty the screen returns to the default information).
+
+</ol>
+
+<p>
+For example, executing the following code will beep the internal buzzer
+for 2 seconds at 4000 Hz:
+</p>
+
+<center>
+<div style="color:rgb(1, 1, 1);font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">write_file</span><span>(</span><span style="color:rgb(170, 17, 17);">&#34;http://BLINX218.local&#34;</span><span>,&nbsp;</span><span style="color:rgb(170, 17, 17);">&#34;buzzer=512/4000/2&#34;</span><span>)</span></code></div>
+</center>
+
+<a id="wifi-configuration-en"><h3><b>4. Wifi configuration</b></h3></a>
+
+<p>
+When several BLINX devices must be used simultaneously, such as in a
+classroom setting, it is best to avoid reconfiguring each BLINX
+device and to simply configure the wifi router to match
+the BLINX factory settings (wifi network named "BLINXNET" with
+password "blinxnet"). Many wifi routers can create a
+secondary wifi network, so the primary one does not have to be changed.
+Purchasing a new wifi router and connecting it to the existing network
+may be a relatively cheap option too.
+</p>
+
+<p>
+In some situations it is required to connect to a specific wifi network
+and password. In that case the BLINX device's wifi settings must be
+modified. The following procedure should be followed to enter the
+configuration mode:
+</p>
+
+<ol>
+
+<li>
+Press and hold one of the buttons, on the left or right side, while you
+plug the BLINX device into a USB port (alternatively click on the reset
+button while holding the left or right button). Keep holding the button
+until the 3 second countdown on the screen is over.
+
+<li>
+Now that the configuration mode is started, you must use a phone or computer
+to join the wifi network with the same name at the BLINX device, for example
+"BLINX218".
+
+<li>
+A captive portal web page will appear where you can select which wifi network
+the BLINX device will connect to in the future. The dropdown menu shows the
+strength of each wifi signal. Also enter the password for this wifi network.
+Finally click the "Apply" button to save the configuration and restart the
+BLINX device.
+
+</ol>
+
 </div>
 
 </div>
@@ -114,11 +264,18 @@ or as a spreadsheet in the editing area by executing
 
 <div class="cb-content">
 
+<center>
+<button onclick="alert(111)">Ouvrir codeBoot</button>
+<button onclick="alert(222)">Exemple de temperature</button>
+<button onclick="alert(333)">Exemple d'avertisseur sonore</button>
+</center>
+
+<br>
+
 <h3><b>1. Introduction</b></h3>
 
 <p>
-L'appareil sans fil BLINX est un accessoire de
-<a href="https://codeboot.org">codeBoot</a>, un environnement
+L'appareil sans fil BLINX est un accessoire de <b>codeBoot</b>, un environnement
 de programmation gratuit qui s'exécute dans le navigateur et qui a été
 spécialement conçu pour rendre la programmation plus accessible et
 conviviale. Une interface utilisateur intuitive évite les complexités
@@ -126,8 +283,8 @@ des environnements de programmation traditionnels. Lorsque BLINX est
 utilisé avec codeBoot, il est facile de créer des programmes qui
 interagissent avec le monde réel. Les utilisateurs peuvent mettre en œuvre
 des fonctionnalités telles que la surveillance de la température ambiante,
-le suivi de l'humidité du sol, la mesure de la distance des objets, et bien
-plus encore.
+le suivi de l'humidité du sol, la mesure de la distance des objets, la
+détection de mouvement, et bien plus encore.
 </p>
 
 <h3><b>2. Opération de l'appareil BLINX</b></h3>
@@ -137,7 +294,7 @@ L'appareil BLINX est alimenté en le branchant sur le port USB d'un ordinateur,
 ou sur un chargeur USB de 5 watts, ou sur une batterie USB. Lorsqu'il est
 alimenté pour la première fois, ou après avoir appuyé sur le bouton de
 réinitialisation, l'écran indiquera le nom du dispositif et le nom du réseau
-wifi auquel il essaie de se connecter, comme indiqué sur l'image suivante:
+Wi-Fi auquel il essaie de se connecter, comme indiqué sur l'image suivante:
 </p>
 
 <center>
@@ -148,8 +305,10 @@ wifi auquel il essaie de se connecter, comme indiqué sur l'image suivante:
 
 <p>
 Avec les réglages d'usine, le dispositif BLINX tente de se connecter au
-réseau wifi nommé « BLINXNET » avec mot de passe « blinxnet ». Cela peut être modifié
-si désiré en utilisant <a>cette procédure</a>. La lumière rouge clignotera tant
+réseau Wi-Fi nommé « BLINXNET » avec mot de passe « blinxnet ». Cela peut être modifié
+si désiré en utilisant
+<a href="#wifi-configuration-en">la procédure expliquée à la section 4</a>.
+La lumière rouge clignotera tant
 que la connexion ne sera pas établie, en particulier si le point d'accès
 est hors de portée ou s'il a atteint sa capacité maximale (les points
 d'accès typiques ont une limite de 20 à 50 appareils connectés).
@@ -158,7 +317,7 @@ d'accès typiques ont une limite de 20 à 50 appareils connectés).
 <p>
 Pour permettre la communication sans fil entre codeBoot et BLINX,
 <b>l'ordinateur exécutant codeBoot doit être connecté au même réseau sans
-fil que l'appareil BLINX</b>. Ce réseau peut être isolé du réseau internet.
+fil que l'appareil BLINX</b>. Ce réseau peut être connecté au réseau internet ou déconnecté lorsqu'un accès privé à l'appareil BLINX est voulu.
 Une configuration typique est illustrée sur l'image suivante:
 </p>
 
@@ -166,17 +325,26 @@ Une configuration typique est illustrée sur l'image suivante:
 <img src="https://raw.githubusercontent.com/codeboot-org/blinx/main/assets/blinxnet-fr.png" width="700px"></img>
 </center>
 
+<p>
+L'appareil BLINX est équipé de capteurs intégrés de température
+ambiante et d'humidité. Il dispose de 3 ports auxquels des
+<a href="https://www.seeedstudio.com/catalogsearch/result/?q=grove%20sensors">capteurs et actionneurs externes</a> peuvent être connectés à l'aide de
+<a href="https://www.seeedstudio.com/catalogsearch/result/?q=grove%20cables">câbles à 4 fils de type « Grove »</a>. Les ports supérieur et inférieur doivent être
+utilisés pour les capteurs analogiques tels que le
+<a href="https://www.seeedstudio.com/Grove-Capacitive-Moisture-Sensor-Corrosion-Resistant.html">capteur d'humidité du sol</a>, le
+<a href="https://www.seeedstudio.com/Grove-PIR-Motion-Sensor.html">capteur de mouvement</a>, et le
+<a href="https://www.seeedstudio.com/One-Wire-Temperature-Sensor-p-1235.html">capteur de température immersible</a>, ainsi que pour les actionneurs tels que le
+<a href="https://www.seeedstudio.com/Grove-Relay.html">relais</a> et le
+<a href="https://www.seeedstudio.com/Grove-Servo.html">servomoteur</a>.
+Le port situé du côté droit est utilisé pour les capteurs de type I2C tels le
+<a href="https://www.seeedstudio.com/Grove-Time-of-Flight-Distance-Sensor-VL53L0X.html">capteur de distance par temps-de-vol</a> et le
+<a href="https://www.seeedstudio.com/Grove-High-Precision-Barometer-Sensor-DPS310-p-4397.html">capteur de pression barométrique</a>.
+</p>
+
 <h3><b>3. Accès programmatique à BLINX</b></h3>
 
 <p>
-L'appareil BLINX fait automatiquement des lectures de ses capteurs à chaque
-seconde et mémorise les lectures récentes dans le format « .csv ». Ces
-données peuvent ensuite être récupérées par un programme comme si c'était
-un fichier « .csv » normal mais à un chemin d'accès HTTP qui indique
-l'adresse de l'appareil BLINX et les capteurs qui sont consultés. Par exemple
-ce code Python pourrait être exécuté dans codeBoot pour lire de
-l'appareil BLINX218 la température et humidité ambiante récente en
-fonction du temps à chaque seconde et la stocker dans la variable
+L'appareil BLINX fait automatiquement des lectures de ses capteurs à chaque seconde et stocke les lectures récentes dans sa mémoire interne. Les données stockées peuvent être récupérées au format « .csv » par un programme, comme s'il s'agissait d'un fichier « .csv » normal, en utilisant une URL HTTP qui indique l'adresse de l'appareil BLINX et les capteurs consultés. Par exemple, le code Python suivant pourrait être exécuté dans codeBoot pour lire la température ambiante récente et l'humidité de BLINX218, en fonction d'intervalles d'une seconde, et les stocker dans la variable
 <span style="color:rgb(1, 1, 1);font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">th</span></code></span> :
 </p>
 
@@ -191,6 +359,102 @@ ou sous forme de tableur dans la zone d'édition en exécutant
 <span style="color:rgb(1, 1, 1);font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">write_file</span><span>(</span><span style="color:rgb(170, 17, 17);">&#34;th.csv&#34;</span><span style="color:rgb(1, 1, 1);">, th);show_file</span><span>(</span><span style="color:rgb(170, 17, 17);">&#34;th.csv&#34;</span><span>)</span></code></span>
 .
 </p>
+
+<p>
+Après le dernier « <code style="color:rgb(1, 1, 1);">/</code> » de l'URL se trouve une liste séparée par des virgules des capteurs consultés, suivie de « .csv ». Les noms des capteurs présentement définis sont les suivants :
+</p>
+
+<ol>
+
+<li>
+<b><code style="color:rgb(1, 1, 1);">temp</code></b> : la température ambiante en degrés Celsius.
+
+
+<li>
+<b><code style="color:rgb(1, 1, 1);">humid</code></b> : l'humidité relative ambiante, de 0 à 100 pour cent.
+
+<li>
+<b><code style="color:rgb(1, 1, 1);">volt1</code></b> and <b><code style="color:rgb(1, 1, 1);">volt2</code></b> : la tension du signal 1 et 2 du port supérieur. Seules les tensions entre 0 et 3 volts peuvent être mesurées, ce qui est compatible avec la plupart des capteurs analogiques Grove. Notez que pour utiliser le signal 2, un câble séparateur ou des compétences en soudure sont nécessaires (le fil jaune du câble est le signal 1 et le fil blanc est le signal 2).
+
+<li>
+<b><code style="color:rgb(1, 1, 1);">volt1</code></b> and <b><code style="color:rgb(1, 1, 1);">volt2</code></b> : la tension du signal 1 et 2 du port inférieur.
+
+<p>
+L'URL peut également se terminer par des modificateurs au format « <code style="color:rgb(1, 1, 1);">?</code><i>modificateur1</i><code style="color:rgb(1, 1, 1);">&</code><i>modificateur2</i><code style="color:rgb(1, 1, 1);">?</code><i>...</i> ». Les modificateurs suivants sont pris en charge :
+</p>
+
+<ol>
+
+<li>
+<b><code style="color:rgb(1, 1, 1);">delta=10s</code></b> : obtenir des lectures à des intervalles de 10 secondes. Pour des intervalles plus longs, les valeurs <b><code style="color:rgb(1, 1, 1);">delta=1m</code></b> (1 minute), <b><code style="color:rgb(1, 1, 1);">delta=10m</code></b> (10 minutes) et <b><code style="color:rgb(1, 1, 1);">delta=1h</code></b> (1 heure) sont également disponibles.
+
+<li>
+<b><code style="color:rgb(1, 1, 1);">n=1</code></b> : obtenir uniquement la dernière lecture. Le nombre après le « <code style="color:rgb(1, 1, 1);">=</code> » correspond au nombre de lectures à obtenir.
+
+</ol>
+
+<p>
+Par exemple, en exécutant le code suivant, on obtient la température ambiante sur les 30 dernières minutes avec une lecture de température par minute :
+</p>
+
+<center>
+<div style="color:rgb(1, 1, 1);font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">temp</span><span>&nbsp;</span><span style="color:rgb(1, 1, 1);">=</span><span>&nbsp;</span><span style="color:rgb(1, 1, 1);">read_file</span><span>(</span><span style="color:rgb(170, 17, 17);">&#34;http://BLINX218.local/temp.csv?delta=1m&amp;n=30&#34;</span><span>)</span></code></div>
+</center>
+
+<p>
+Les actionneurs sont pris en charge par la fonction
+<span style="color:rgb(1, 1, 1);font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">write_file</span></code></span>. Le premier paramètre est l'URL de l'appareil BLINX, et le deuxième paramètre est un texte indiquant l'opération. Les opérations suivantes sont définies :
+</p>
+
+<ol>
+
+<li>
+<b><i>sortie</i><code style="color:rgb(1, 1, 1);">=on</code></b> : envoie une impulsion « allumée » à la <i>sortie</i> pendant 10 secondes. La <i>sortie</i> peut être
+<code style="color:rgb(1, 1, 1);">led</code> (la DEL rouge), ou <code style="color:rgb(1, 1, 1);">buzzer</code> (l'avertisseur sonore interne) ou
+<code style="color:rgb(1, 1, 1);">output1</code>/<code style="color:rgb(1, 1, 1);">output2</code>/<code style="color:rgb(1, 1, 1);">output3</code>/<code style="color:rgb(1, 1, 1);">output4</code> (les 4 signaux des ports supérieur et inférieur). Une utilisation typique est d'allumer un actionneur externe tel qu'un relais, une lumière, etc.
+
+<li>
+<b><i>sortie</i><code style="color:rgb(1, 1, 1);">=on/0/</code><i>durée</i></b> :  envoie une impulsion « allumée »  à la <i>sortie</i> pendant une <i>durée</i> donnée en secondes. Après cette durée, le signal sera « éteint » jusqu'à la prochaine opération sur ce port.
+
+<li>
+<b><i>sortie</i><code style="color:rgb(1, 1, 1);">=</code><i>service</i><code style="color:rgb(1, 1, 1);">/</code><i>frequence</i><code style="color:rgb(1, 1, 1);">/</code><i>durée</i></b> : envoie une onde carrée à la sortie. La fréquence est la <i>frequence</i> en Hz, <i>service</i>/1024 est la proportion du cycle de l'onde carrée pendant laquelle le signal est « allumé », et <i>durée</i> est la durée de l'onde. Une utilisation courante est de générer une onde PWM pour contrôler un servo-moteur.
+
+<li>
+<b><code style="color:rgb(1, 1, 1);">screen=</code><i>texte</i></b> : 
+écrit le texte à l'écran (si le <i>texte</i> est vide, l'écran revient aux informations par défaut).
+
+</ol>
+
+<p>
+Par exemple, en exécutant le code suivant, l'avertisseur sonore interne émettra un bip pendant 2 secondes à une fréquence de 4000 Hz :
+</p>
+
+<center>
+<div style="color:rgb(1, 1, 1);font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">write_file</span><span>(</span><span style="color:rgb(170, 17, 17);">&#34;http://BLINX218.local&#34;</span><span>,&nbsp;</span><span style="color:rgb(170, 17, 17);">&#34;buzzer=512/4000/2&#34;</span><span>)</span></code></div>
+</center>
+
+<a id="wifi-configuration-fr"><h3><b>4. Configuration du Wi-Fi</b></h3></a>
+
+<p>
+Lorsque plusieurs appareils BLINX doivent être utilisés simultanément, comme dans un environnement scolaire, il est préférable d'éviter de reconfigurer chaque appareil BLINX et de simplement configurer le routeur Wi-Fi pour correspondre aux paramètres d'usine de BLINX (réseau Wi-Fi nommé « BLINXNET » avec le mot de passe « blinxnet »). De nombreux routeurs Wi-Fi peuvent créer un réseau Wi-Fi secondaire, de sorte que le réseau principal n'a pas besoin d'être modifié. L'achat d'un nouveau routeur Wi-Fi et sa connexion au réseau existant peut également être une option relativement peu coûteuse.
+</p>
+
+<p>
+Dans certaines situations, il est nécessaire de se connecter à un réseau Wi-Fi spécifique et de fournir un mot de passe. Dans ce cas, les paramètres Wi-Fi de l'appareil BLINX doivent être modifiés. La procédure suivante doit être suivie pour entrer en mode de configuration :
+</p>
+
+<ol>
+
+<li>
+Appuyez et maintenez l'un des boutons, sur le côté gauche ou droit, pendant que vous branchez l'appareil BLINX sur un port USB (ou cliquez alternativement sur le bouton de réinitialisation tout en maintenant le bouton gauche ou droit enfoncé). Continuez à maintenir le bouton enfoncé jusqu'à ce que le compte à rebours de 3 secondes sur l'écran soit terminé.
+
+<li>
+Maintenant que le mode de configuration est lancé, vous devez utiliser un téléphone ou un ordinateur pour rejoindre le réseau Wi-Fi portant le même nom que l'appareil BLINX, par exemple « BLINX218 ».
+
+<li>
+Une page web de portail captif apparaîtra, où vous pourrez sélectionner le réseau Wi-Fi auquel l'appareil BLINX se connectera à l'avenir. Le menu déroulant affiche la force de chaque signal Wi-Fi. Entrez également le mot de passe de ce réseau Wi-Fi. Enfin, cliquez sur le bouton « Apply » pour enregistrer la configuration et redémarrer l'appareil BLINX.
+
+</ol>
 
 </div>
 
