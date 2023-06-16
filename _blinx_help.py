@@ -2,6 +2,6 @@
 
 html = read_file('https://raw.githubusercontent.com/codeboot-org/blinx/main/_blinx_help.html')
 
-document.body.innerHTML = html
+host_eval('(function (html) { var body = document.querySelector("#cb-body"); body.innerHTML = html; body.vm = rte.vm; })')(html)
 
 document.body.setAttribute('lang', document.querySelector('.cb-vm').getAttribute('lang'))

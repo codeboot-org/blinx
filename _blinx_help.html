@@ -23,6 +23,16 @@
 
 </style>
 
+<script>
+
+function openCodeBoot() {
+  var body = document.querySelector('#cb-body');
+  body.innerHTML = '';
+  body.vm.setHidden(false);
+}
+  
+</script>
+
 <div class="cb-en">
 
 <header>Help on BLINX</header>
@@ -30,9 +40,7 @@
 <div class="cb-content">
 
 <center>
-<button onclick="alert(111)">Open codeBoot</button>
-<button onclick="alert(222)">Temperature example</button>
-<button onclick="alert(333)">Buzzer example</button>
+<button onclick="openCodeBoot()">Open codeBoot</button>
 </center>
 
 <br>
@@ -265,9 +273,7 @@ BLINX device.
 <div class="cb-content">
 
 <center>
-<button onclick="alert(111)">Ouvrir codeBoot</button>
-<button onclick="alert(222)">Exemple de temperature</button>
-<button onclick="alert(333)">Exemple d'avertisseur sonore</button>
+<button onclick="openCodeBoot()">Ouvrir codeBoot</button>
 </center>
 
 <br>
@@ -307,7 +313,7 @@ Wi-Fi auquel il essaie de se connecter, comme indiqué sur l'image suivante:
 Avec les réglages d'usine, le dispositif BLINX tente de se connecter au
 réseau Wi-Fi nommé « BLINXNET » avec mot de passe « blinxnet ». Cela peut être modifié
 si désiré en utilisant
-<a href="#wifi-configuration-en">la procédure expliquée à la section 4</a>.
+<a href="#wifi-configuration-fr">la procédure expliquée à la section 4</a>.
 La lumière rouge clignotera tant
 que la connexion ne sera pas établie, en particulier si le point d'accès
 est hors de portée ou s'il a atteint sa capacité maximale (les points
