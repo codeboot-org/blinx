@@ -87,6 +87,8 @@ setup is shown in the following picture:
 <img src="https://raw.githubusercontent.com/codeboot-org/blinx/main/assets/blinxnet-en.png" width="700px"></img>
 </center>
 
+<br>
+
 <p>
 The BLINX device has integrated ambiant temperature and humidity sensors.
 There are 3 ports to which
@@ -120,6 +122,8 @@ intervals of one second, and store them in the variable
 <center>
 <div style="color:rgb(1, 1, 1);font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">th</span><span>&nbsp;</span><span style="color:rgb(1, 1, 1);">=</span><span>&nbsp;</span><span style="color:rgb(1, 1, 1);">read_file</span><span>(</span><span style="color:rgb(170, 17, 17);">&#34;http://BLINX218.local/temp,humid.csv&#34;</span><span>)</span></code></div>
 </center>
+
+<br>
 
 <p>
 The data can then be viewed in the form of a graph using
@@ -175,6 +179,8 @@ over the last 30 minutes with one temperature reading per minute:
 <div style="color:rgb(1, 1, 1);font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">temp</span><span>&nbsp;</span><span style="color:rgb(1, 1, 1);">=</span><span>&nbsp;</span><span style="color:rgb(1, 1, 1);">read_file</span><span>(</span><span style="color:rgb(170, 17, 17);">&#34;http://BLINX218.local/temp.csv?delta=1m&amp;n=30&#34;</span><span>)</span></code></div>
 </center>
 
+<br>
+
 <p>
 Actuators are supported through the
 <span style="color:rgb(1, 1, 1);font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">write_file</span></code></span>
@@ -209,6 +215,8 @@ for 2 seconds at 4000 Hz:
 <center>
 <div style="color:rgb(1, 1, 1);font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">write_file</span><span>(</span><span style="color:rgb(170, 17, 17);">&#34;http://BLINX218.local&#34;</span><span>,&nbsp;</span><span style="color:rgb(170, 17, 17);">&#34;buzzer=512/4000/2&#34;</span><span>)</span></code></div>
 </center>
+
+<br>
 
 <a id="wifi-configuration-en"><h3><b>4. Wifi configuration</b></h3></a>
 
@@ -321,6 +329,8 @@ Une configuration typique est illustrée sur l'image suivante:
 <img src="https://raw.githubusercontent.com/codeboot-org/blinx/main/assets/blinxnet-fr.png" width="700px"></img>
 </center>
 
+<br>
+
 <p>
 L'appareil BLINX est équipé de capteurs intégrés de température
 ambiante et d'humidité. Il dispose de 3 ports auxquels des
@@ -348,6 +358,8 @@ L'appareil BLINX fait automatiquement des lectures de ses capteurs à chaque sec
 <div style="color:rgb(1, 1, 1);font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">th</span><span>&nbsp;</span><span style="color:rgb(1, 1, 1);">=</span><span>&nbsp;</span><span style="color:rgb(1, 1, 1);">read_file</span><span>(</span><span style="color:rgb(170, 17, 17);">&#34;http://BLINX218.local/temp,humid.csv&#34;</span><span>)</span></code></div>
 </center>
 
+<br>
+
 <p>
 Les données peuvent ensuite être visionnées sous forme de graphique avec
 <span style="color:rgb(1, 1, 1);font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">chart(th)</span></code></span>
@@ -365,7 +377,6 @@ Après le dernier « <code style="color:rgb(1, 1, 1);">/</code> » de l'URL se t
 <li>
 <b><code style="color:rgb(1, 1, 1);">temp</code></b> : la température ambiante en degrés Celsius.
 
-
 <li>
 <b><code style="color:rgb(1, 1, 1);">humid</code></b> : l'humidité relative ambiante, de 0 à 100 pour cent.
 
@@ -374,6 +385,8 @@ Après le dernier « <code style="color:rgb(1, 1, 1);">/</code> » de l'URL se t
 
 <li>
 <b><code style="color:rgb(1, 1, 1);">volt1</code></b> and <b><code style="color:rgb(1, 1, 1);">volt2</code></b> : la tension du signal 1 et 2 du port inférieur.
+
+</ol>
 
 <p>
 L'URL peut également se terminer par des modificateurs au format « <code style="color:rgb(1, 1, 1);">?</code><i>modificateur1</i><code style="color:rgb(1, 1, 1);">&</code><i>modificateur2</i><code style="color:rgb(1, 1, 1);">?</code><i>...</i> ». Les modificateurs suivants sont pris en charge :
@@ -396,6 +409,8 @@ Par exemple, en exécutant le code suivant, on obtient la température ambiante 
 <center>
 <div style="color:rgb(1, 1, 1);font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">temp</span><span>&nbsp;</span><span style="color:rgb(1, 1, 1);">=</span><span>&nbsp;</span><span style="color:rgb(1, 1, 1);">read_file</span><span>(</span><span style="color:rgb(170, 17, 17);">&#34;http://BLINX218.local/temp.csv?delta=1m&amp;n=30&#34;</span><span>)</span></code></div>
 </center>
+
+<br>
 
 <p>
 Les actionneurs sont pris en charge par la fonction
@@ -428,6 +443,8 @@ Par exemple, en exécutant le code suivant, l'avertisseur sonore interne émettr
 <center>
 <div style="color:rgb(1, 1, 1);font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">write_file</span><span>(</span><span style="color:rgb(170, 17, 17);">&#34;http://BLINX218.local&#34;</span><span>,&nbsp;</span><span style="color:rgb(170, 17, 17);">&#34;buzzer=512/4000/2&#34;</span><span>)</span></code></div>
 </center>
+
+<br>
 
 <a id="wifi-configuration-fr"><h3><b>4. Configuration du Wi-Fi</b></h3></a>
 
