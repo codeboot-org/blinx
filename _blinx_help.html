@@ -148,10 +148,10 @@ These sensor names are currently defined:
 <b><code style="color:rgb(1, 1, 1);">humid</code></b>: the ambiant relative humidity, from 0 to 100 percent.
 
 <li>
-<b><code style="color:rgb(1, 1, 1);">volt1</code></b> and <b><code style="color:rgb(1, 1, 1);">volt2</code></b>: the voltage at signal 1 and 2 of the top port. Only voltages between 0 and 3 volts can be measured, which is compatible with most Grove analog sensors. Note that to use signal 2 a splitter cable or soldering skills are required (the cable's yellow wire is signal 1 and the white wire is signal 2).
+<b><code style="color:rgb(1, 1, 1);">volt1</code></b> and <b><code style="color:rgb(1, 1, 1);">volt3</code></b>: the voltage at signal 1 and 2 of the top port. Only voltages between 0 and 3 volts can be measured, which is compatible with most Grove analog sensors. Note that to use signal 2 a splitter cable or soldering skills are required (the cable's yellow wire is signal 1 and the white wire is signal 2).
 
 <li>
-<b><code style="color:rgb(1, 1, 1);">volt3</code></b> and <b><code style="color:rgb(1, 1, 1);">volt4</code></b>: the voltage at signal 1 and 2 of the bottom port.
+<b><code style="color:rgb(1, 1, 1);">volt2</code></b> and <b><code style="color:rgb(1, 1, 1);">volt4</code></b>: the voltage at signal 1 and 2 of the bottom port.
 
 </ol>
 
@@ -196,10 +196,10 @@ are defined:
 <code style="color:rgb(1, 1, 1);">output1</code>/<code style="color:rgb(1, 1, 1);">output2</code>/<code style="color:rgb(1, 1, 1);">output3</code>/<code style="color:rgb(1, 1, 1);">output4</code> (the 4 signals of the top and bottom ports). A typical use is to turn on an externally connected actuator such as a relay, light, etc.
 
 <li>
-<b><i>output</i><code style="color:rgb(1, 1, 1);">=on/0/</code><i>duration</i></b>: sends an "on" pulse to <i>output</i> for <i>duration</i> seconds. After this duration the signal will be "off" until the next operation on that port.
+<b><i>output</i><code style="color:rgb(1, 1, 1);">=on/</code><i>duration</i></b>: sends an "on" pulse to <i>output</i> for <i>duration</i> seconds. After this duration the signal will be "off" until the next operation on that port.
 
 <li>
-<b><i>output</i><code style="color:rgb(1, 1, 1);">=</code><i>duty</i><code style="color:rgb(1, 1, 1);">/</code><i>frequency</i><code style="color:rgb(1, 1, 1);">/</code><i>duration</i></b>: sends a square wave to <i>output</i> where
+<b><i>output</i><code style="color:rgb(1, 1, 1);">=</code><i>duty</i><code style="color:rgb(1, 1, 1);">/</code><i>duration</i><code style="color:rgb(1, 1, 1);">/</code><i>frequency</i></b>: sends a square wave to <i>output</i> where
 <i>frequency</i> is the frequency in Hz, <i>duty</i>/1024 is the proportion of the square wave cycle when the signal is "on", and <i>duration</i> is the duration of the wave. A typical use is to generate a PWM wave to control a servo motor.
 
 <li>
@@ -213,7 +213,7 @@ for 2 seconds at 4000 Hz:
 </p>
 
 <center>
-<div style="color:rgb(1, 1, 1);font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">write_file</span><span>(</span><span style="color:rgb(170, 17, 17);">&#34;http://BLINX218.local&#34;</span><span>,&nbsp;</span><span style="color:rgb(170, 17, 17);">&#34;buzzer=512/4000/2&#34;</span><span>)</span></code></div>
+<div style="color:rgb(1, 1, 1);font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">write_file</span><span>(</span><span style="color:rgb(170, 17, 17);">&#34;http://BLINX218.local&#34;</span><span>,&nbsp;</span><span style="color:rgb(170, 17, 17);">&#34;buzzer=512/2/4000&#34;</span><span>)</span></code></div>
 </center>
 
 <br>
@@ -381,10 +381,10 @@ Après le dernier « <code style="color:rgb(1, 1, 1);">/</code> » de l'URL se t
 <b><code style="color:rgb(1, 1, 1);">humid</code></b> : l'humidité relative ambiante, de 0 à 100 pour cent.
 
 <li>
-<b><code style="color:rgb(1, 1, 1);">volt1</code></b> and <b><code style="color:rgb(1, 1, 1);">volt2</code></b> : la tension du signal 1 et 2 du port supérieur. Seules les tensions entre 0 et 3 volts peuvent être mesurées, ce qui est compatible avec la plupart des capteurs analogiques Grove. Notez que pour utiliser le signal 2, un câble séparateur ou des compétences en soudure sont nécessaires (le fil jaune du câble est le signal 1 et le fil blanc est le signal 2).
+<b><code style="color:rgb(1, 1, 1);">volt1</code></b> and <b><code style="color:rgb(1, 1, 1);">volt3</code></b> : la tension du signal 1 et 2 du port supérieur. Seules les tensions entre 0 et 3 volts peuvent être mesurées, ce qui est compatible avec la plupart des capteurs analogiques Grove. Notez que pour utiliser le signal 2, un câble séparateur ou des compétences en soudure sont nécessaires (le fil jaune du câble est le signal 1 et le fil blanc est le signal 2).
 
 <li>
-<b><code style="color:rgb(1, 1, 1);">volt1</code></b> and <b><code style="color:rgb(1, 1, 1);">volt2</code></b> : la tension du signal 1 et 2 du port inférieur.
+<b><code style="color:rgb(1, 1, 1);">volt2</code></b> and <b><code style="color:rgb(1, 1, 1);">volt4</code></b> : la tension du signal 1 et 2 du port inférieur.
 
 </ol>
 
@@ -425,10 +425,10 @@ Les actionneurs sont pris en charge par la fonction
 <code style="color:rgb(1, 1, 1);">output1</code>/<code style="color:rgb(1, 1, 1);">output2</code>/<code style="color:rgb(1, 1, 1);">output3</code>/<code style="color:rgb(1, 1, 1);">output4</code> (les 4 signaux des ports supérieur et inférieur). Une utilisation typique est d'allumer un actionneur externe tel qu'un relais, une lumière, etc.
 
 <li>
-<b><i>sortie</i><code style="color:rgb(1, 1, 1);">=on/0/</code><i>durée</i></b> :  envoie une impulsion « allumée »  à la <i>sortie</i> pendant une <i>durée</i> donnée en secondes. Après cette durée, le signal sera « éteint » jusqu'à la prochaine opération sur ce port.
+<b><i>sortie</i><code style="color:rgb(1, 1, 1);">=on/</code><i>durée</i></b> :  envoie une impulsion « allumée » à la <i>sortie</i> pendant une <i>durée</i> donnée en secondes. Après cette durée, le signal sera « éteint » jusqu'à la prochaine opération sur ce port.
 
 <li>
-<b><i>sortie</i><code style="color:rgb(1, 1, 1);">=</code><i>service</i><code style="color:rgb(1, 1, 1);">/</code><i>frequence</i><code style="color:rgb(1, 1, 1);">/</code><i>durée</i></b> : envoie une onde carrée à la sortie. La fréquence est la <i>frequence</i> en Hz, <i>service</i>/1024 est la proportion du cycle de l'onde carrée pendant laquelle le signal est « allumé », et <i>durée</i> est la durée de l'onde. Une utilisation courante est de générer une onde PWM pour contrôler un servo-moteur.
+<b><i>sortie</i><code style="color:rgb(1, 1, 1);">=</code><i>service</i><code style="color:rgb(1, 1, 1);">/</code><i>durée</i><code style="color:rgb(1, 1, 1);">/</code><i>frequence</i></b> : envoie une onde carrée à la sortie. La fréquence en Hz est <i>frequence</i>, la proportion du cycle de l'onde carrée pendant laquelle le signal est « allumé » est <i>service</i>/1024, et <i>durée</i> est la durée de l'onde. Une utilisation courante est de générer une onde PWM pour contrôler un servo-moteur.
 
 <li>
 <b><code style="color:rgb(1, 1, 1);">screen=</code><i>texte</i></b> : 
@@ -441,7 +441,7 @@ Par exemple, en exécutant le code suivant, l'avertisseur sonore interne émettr
 </p>
 
 <center>
-<div style="color:rgb(1, 1, 1);font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">write_file</span><span>(</span><span style="color:rgb(170, 17, 17);">&#34;http://BLINX218.local&#34;</span><span>,&nbsp;</span><span style="color:rgb(170, 17, 17);">&#34;buzzer=512/4000/2&#34;</span><span>)</span></code></div>
+<div style="color:rgb(1, 1, 1);font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;"><code><span style="color:rgb(1, 1, 1);">write_file</span><span>(</span><span style="color:rgb(170, 17, 17);">&#34;http://BLINX218.local&#34;</span><span>,&nbsp;</span><span style="color:rgb(170, 17, 17);">&#34;buzzer=512/2/4000&#34;</span><span>)</span></code></div>
 </center>
 
 <br>
