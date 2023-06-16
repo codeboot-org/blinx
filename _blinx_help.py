@@ -8,6 +8,7 @@ document.body.innerHTML = read_file('https://raw.githubusercontent.com/codeboot-
 
 def switch_to_codeboot(e):
     document.body.innerHTML = ""
+    app.clear_console()
     app.show()
 
 document.querySelector("#button-open-fr").addEventListener("click", switch_to_codeboot)
