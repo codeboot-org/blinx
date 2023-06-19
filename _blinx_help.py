@@ -4,7 +4,6 @@ from codeboot_app import app
 app.hide()
 document.body.innerHTML = read_file('https://raw.githubusercontent.com/codeboot-org/blinx/main/_blinx_help.html')
 
-
 # Event handlers
 def add_example():
     blinx_config_filename = "blinx_config.py"
@@ -12,7 +11,7 @@ def add_example():
 
     # Create file with blinx configuration from app parameters
     blinx_config_code = ('id = "BLINX' + str(app.params.get('blinx-blx', "000")) + '"\n'
-                         'url = "http://" + blinx_id + ".local/"\n')
+                         'url = "http://" + id + ".local/"\n')
     write_file(blinx_config_filename, blinx_config_code)
 
     # Create file with blinx usage example
@@ -27,6 +26,9 @@ def add_example():
                           '    sleep(1)\n')
 
     write_file(blinx_example_filename, blinx_example_code)
+
+    # Open files
+    show_file(blinx_config_filename)
     show_file(blinx_example_filename)
 
 def switch_to_codeboot(e):
