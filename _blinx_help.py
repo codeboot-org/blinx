@@ -21,7 +21,10 @@ def get_example_code():
     return example_code.get(app.lang) or example_code['en']
 
 # Event handlers
-def add_example():
+def exec_example():
+    def execute():
+        import blinx_temp
+
     blinx_config_filename = "blinx_config.py"
     blinx_example_filename = "blinx_temp.py"
 
@@ -38,6 +41,8 @@ def add_example():
     show_file(blinx_config_filename)
     show_file(blinx_example_filename, focus=True)
 
+    execute()
+
 def switch_to_codeboot(e):
     document.body.innerHTML = ""
     app.clear_console()
@@ -45,7 +50,7 @@ def switch_to_codeboot(e):
 
 def switch_to_codeboot_and_open_example(e):
     switch_to_codeboot(e)
-    add_example()
+    exec_example()
 
 # Add event handlers
 document.querySelector("#button-open-fr").addEventListener("click", switch_to_codeboot)
