@@ -274,7 +274,7 @@ BLINX device.
   module in codeBoot.
 </p>
 
-<code>
+<pre>
 from chart import chart
 from time import sleep
 
@@ -283,7 +283,7 @@ import blinx_config # see blinx_config.py
 while True:
   data = read_file(blinx_config.url + "temp,humid.csv")
   chart(data, x_axis="time", y_axis="value")
-</code>
+</pre>
 
 <center>
   <button id="button-example-en">Run in codeBoot</button>
