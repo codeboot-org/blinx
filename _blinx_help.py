@@ -1,4 +1,4 @@
-from codeboot import app
+from codeboot_app import app
 
 app.hide()
 
