@@ -6,16 +6,12 @@ document.body.innerHTML = read_file('https://raw.githubusercontent.com/codeboot-
 
 # i18n code
 example_code = {}
-example_code['en'] = ('from chart import chart\n'
-                      '\n'
-                      'import blinx_config  # see blinx_config.py\n'
+example_code['en'] = ('import blinx_config  # see blinx_config.py\n'
                       '\n'
                       'while True:\n'
                       '    data = read_file(blinx_config.url + "temp,humid.csv")\n'
                       '    chart(data, x_axis="time", y_axis="value")\n')
-example_code['fr'] = ('from chart import chart\n'
-                      '\n'
-                      'import blinx_config  # voir le fichier blinx.config.py\n'
+example_code['fr'] = ('import blinx_config  # voir le fichier blinx.config.py\n'
                       '\n'
                       'while True:\n'
                       '    data = read_file(blinx_config.url + "temp,humid.csv")\n'
