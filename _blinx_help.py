@@ -4,6 +4,28 @@ from codeboot_app import app
 app.hide()
 document.body.innerHTML = read_file('https://raw.githubusercontent.com/codeboot-org/blinx/main/_blinx_help.html')
 
+# i18n code
+example_code = {}
+example_code['en'] = ('from chart import chart\n'
+                      'from time import sleep\n'
+                      '\n'
+                      'import blinx_config  # see blinx_config.py\n'
+                      '\n'
+                      'while True:\n'
+                      '    data = read_file(blinx_config.url + "temp,humid.csv")\n'
+                      '    chart(data, x_axis="time", y_axis="value")\n')
+example_code['fr'] = ('from chart import chart\n'
+                      'from time import sleep\n'
+                      '\n'
+                      'import blinx_config  # voir le fichier blinx.config.py\n'
+                      '\n'
+                      'while True:\n'
+                      '    data = read_file(blinx_config.url + "temp,humid.csv")\n'
+                      '    chart(data, x_axis="temps", y_axis="valeur")\n')
+
+def get_example_code():
+    return example_code.get(app.lang) or example_code['en']
+
 # Event handlers
 def add_example():
     blinx_config_filename = "blinx_config.py"
@@ -15,15 +37,7 @@ def add_example():
     write_file(blinx_config_filename, blinx_config_code)
 
     # Create file with blinx usage example
-    blinx_example_code = ('from chart import chart\n'
-                          'from time import sleep\n'
-                          '\n'
-                          'import blinx_config\n'
-                          '\n'
-                          'while True:\n'
-                          '    data = read_file(blinx_config.url + "temp,humid.csv")\n'
-                          '    chart(data, x_axis="time", y_axis="value")\n')
-
+    blinx_example_code = get_example_code()
     write_file(blinx_example_filename, blinx_example_code)
 
     # Open files
@@ -33,8 +47,8 @@ def add_example():
 def switch_to_codeboot(e):
     document.body.innerHTML = ""
     app.clear_console()
-    add_example()
     app.show()
+    add_example()
 
 # Add event handlers
 document.querySelector("#button-open-fr").addEventListener("click", switch_to_codeboot)
