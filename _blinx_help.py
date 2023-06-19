@@ -28,7 +28,7 @@ def add_example():
 
     # Open files
     show_file(blinx_config_filename)
-    show_file(blinx_example_filename)
+    show_file(blinx_example_filename, focus=True)
 
 def switch_to_codeboot(e):
     document.body.innerHTML = ""
