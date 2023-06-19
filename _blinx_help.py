@@ -48,11 +48,16 @@ def switch_to_codeboot(e):
     document.body.innerHTML = ""
     app.clear_console()
     app.show()
+
+def switch_to_codeboot_and_open_example(e):
+    switch_to_codeboot(e)
     add_example()
 
 # Add event handlers
 document.querySelector("#button-open-fr").addEventListener("click", switch_to_codeboot)
 document.querySelector("#button-open-en").addEventListener("click", switch_to_codeboot)
+document.querySelector("#button-example-fr").addEventListener("click", switch_to_codeboot_and_open_example)
+document.querySelector("#button-example-en").addEventListener("click", switch_to_codeboot_and_open_example)
 
 # Set language
 document.body.setAttribute('lang', app.lang)
