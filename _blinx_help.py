@@ -21,8 +21,8 @@ def add_example():
                           'import blinx_config\n'
                           '\n'
                           'while True:\n'
-                          '    data = read_file(blinx_config.url + "temp.csv")\n'
-                          '    chart(data)\n'
+                          '    data = read_file(blinx_config.url + "temp,humid.csv")\n'
+                          '    chart(data, x_axis="time", y_axis="value")\n'
                           '    sleep(1)\n')
 
     write_file(blinx_example_filename, blinx_example_code)
