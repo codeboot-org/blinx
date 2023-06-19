@@ -501,6 +501,35 @@ Une page web de portail captif apparaîtra, où vous pourrez sélectionner le r�
 
 </ol>
 
+<a id="blinx-example-fr">
+  <h3><b>5. Exemple</b></h3>
+</a>
+
+<p>
+  L'exemple ci-bas utiliser <code>read_file</code> pour récupérer les température et humidité
+  mesurées par votre dispositif blinx et les affiche à l'aide du module <code>chart</code>.
+</p>
+
+<p>
+  Vous pouvez adapter cet exemple afin d'utiliser un autre dispositif blinx en modifiant le fichier
+  <code>blinx_config.py</code> dans codeBoot.
+</p>
+
+<pre>
+from chart import chart
+from time import sleep
+
+import blinx_config # voir le fichier blinx_config.py
+
+while True:
+  data = read_file(blinx_config.url + "temp,humid.csv")
+  chart(data, x_axis="temps", y_axis="valeur")
+</pre>
+
+<center>
+  <button id="button-example-fr">Exécuter dans codeBoot</button>
+</center>
+
 </div>
 
 </div>
