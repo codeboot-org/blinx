@@ -274,19 +274,16 @@ BLINX device.
   module in codeBoot.
 </p>
 
-<div data-codeboot-type="file" data-codeboot-file-name="blinx_temp.py"><span data-cb-link><a
-      href="https://app.codeboot.org/4.0.1/?init=.oYmxpbnhfY29uZmlnLnB5~XQAAgAAxAAAAAAAAAAA0mQAC0BxZwDp9L8DiufTxCINs3odPsxBQWeWeRAuZKieS5ia6SCRjZ2wG_S_sle3sf__PxwAA.fYmxpbnhfdGVtcC5weQ==~XQAAgADRAAAAAAAAAAAzHIoib6pXUsvr-4fezwJbF_unW_RzTEYXtOfBizs7qDfzM8EKFcPteJdcDwOWhJywuv7yxbyMcD_3yzUE86dPthB59sQyFaNleXc4N37paIjYjBlvzn_qjYqogoHkkFX2CYQfnasE_N2b67FbxPG8NDSv2CrDeFkoIGB_dCWBt9sd4IE7aOaDBzSo7gztn6sw2Ik57f8gpk4A.~lang=py-novice.~largeFont=true.e"
-      style="font-size:18px;"><span data-cb-text>Execute blinx_temp<br><br></span><span data-cb-image
-        style="display:none"><svg class="cb-svg-clone" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
-          <g>
-            <path d="M 55 60 L 55 206 L 201 206 L 201 60 Z M 65 85 L 191 85 L 191 196 L 65 196 Z" />
-          </g>
-        </svg></span></a></span>
-  <div
-    style="color:rgb(1, 1, 1);font-size:18px;font-family:&quot;Consolas&quot;,&quot;Monaco&quot;,&quot;Courier New&quot;,monospace;white-space:pre;font-weight:400;">
-    <code><span style="color:rgb(119, 0, 136);">from</span><span>&nbsp;</span><span style="color:rgb(1, 1, 1);">chart</span><span>&nbsp;</span><span style="color:rgb(119, 0, 136);">import</span><span>&nbsp;</span><span style="color:rgb(1, 1, 1);">chart</span><br><span style="color:rgb(119, 0, 136);">from</span><span>&nbsp;</span><span style="color:rgb(1, 1, 1);">time</span><span>&nbsp;</span><span style="color:rgb(119, 0, 136);">import</span><span>&nbsp;</span><span style="color:rgb(1, 1, 1);">sleep</span><br><br><span style="color:rgb(119, 0, 136);">import</span><span>&nbsp;</span><span style="color:rgb(1, 1, 1);">blinx_config</span><span>&nbsp;&nbsp;</span><span style="color:rgb(170, 85, 0);">#&nbsp;see&nbsp;blinx_config.py</span><br><br><span style="color:rgb(119, 0, 136);">while</span><span>&nbsp;</span><span style="color:rgb(119, 0, 136);">True</span><span>:</span><br><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:rgb(1, 1, 1);">data</span><span>&nbsp;</span><span style="color:rgb(1, 1, 1);">=</span><span>&nbsp;</span><span style="color:rgb(1, 1, 1);">read_file</span><span>(</span><span style="color:rgb(1, 1, 1);">blinx_config</span><span>.</span><span style="color:rgb(1, 1, 1);">url</span><span>&nbsp;</span><span style="color:rgb(1, 1, 1);">+</span><span>&nbsp;</span><span style="color:rgb(170, 17, 17);">&#34;temp,humid.csv&#34;</span><span>)</span><br><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:rgb(1, 1, 1);">chart</span><span>(</span><span style="color:rgb(1, 1, 1);">data</span><span>,</span><span>&nbsp;</span><span style="color:rgb(1, 1, 1);">x_axis</span><span style="color:rgb(1, 1, 1);">=</span><span style="color:rgb(170, 17, 17);">&#34;time&#34;</span><span>,</span><span>&nbsp;</span><span style="color:rgb(1, 1, 1);">y_axis</span><span style="color:rgb(1, 1, 1);">=</span><span style="color:rgb(170, 17, 17);">&#34;value&#34;</span><span>)</span></code>
-  </div>
-</div>
+<code>
+from chart import chart
+from time import sleep
+
+import blinx_config # see blinx_config.py
+
+while True:
+  data = read_file(blinx_config.url + "temp,humid.csv")
+  chart(data, x_axis="time", y_axis="value")
+</code>
 
 <center>
   <button id="button-example-en">Run in codeBoot</button>
